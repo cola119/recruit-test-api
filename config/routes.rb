@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  Rails.application.routes.draw do
+    namespace 'api' do
+      namespace 'v1' do
+        post 'signup', to: 'users#new'
+        get 'users/:id', to: 'users#show'
+        patch 'users/:id', to: 'users#upadte'
+        post 'close', to: 'users#destroy'
+      end
+    end
+  end
 end
