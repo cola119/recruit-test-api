@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
     def new
         @user = User.new(user_params)
         return response_bad_request(@user.errors.full_messages.first) unless @user.valid?
+        user.token = Base64.encode64(user_params[:user_id] + ':' + user_params[:password])
         @user.save ? response_success("Account successfully created", {"user_id": @user.user_id, "nickname": @user.user_id}) : response_internal_server_error
     end
 
@@ -43,10 +44,6 @@ class Api::V1::UsersController < ApplicationController
 
         def authenticate
             authenticate_token || response_unauthorized
-            # authenticate_or_request_with_http_token do |token, options|
-            #     auth_user = User.find_by(token: token)
-            #     auth_user != nil ? true : false
-            # end
         end
 
         def authenticate_token
