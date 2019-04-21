@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 2019_04_21_160029) do
     t.string "password"
     t.string "nickname"
     t.string "comment"
-    t.string "toke"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["toke"], name: "index_users_on_toke", unique: true
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
 end

@@ -5,10 +5,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password
       t.string :nickname
       t.string :comment
-      t.string :toke
+      t.string :token
 
       t.timestamps
     end
-    add_index :users, :toke, unique: true
+    add_index :users, :token, unique: true
   end
 end
