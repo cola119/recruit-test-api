@@ -20,6 +20,10 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def destroy
+        @user = User.find_by(user_id: params[:user_id])
+        return response_not_found() if @user.nil?
+        @comp.destroy
+        render status: 200, json: { "message": "Account and user successfully removed" }
     end
 
     private
