@@ -10,7 +10,16 @@ class Api::V1::UsersController < ApplicationController
     def show
         @user = User.find_by(user_id: params[:user_id])
         return response_not_found() if @user.nil?
-        response_success("User details by user_id", @user)
+        data = @user.nickname.nil? ? 
+        {
+            user_id: @user.user_id,
+            nickname: @user.nickname,
+            comment: @user.comment,
+        } : {
+            user_id: @user.user_id,
+            user_id: @user.user_id,
+        }
+        response_success("User details by user_id", data)
     end
 
     def update
