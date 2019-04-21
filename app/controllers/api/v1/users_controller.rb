@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
     include ActionController::HttpAuthentication::Token::ControllerMethods
-    before_action :authenticate, except: [:new]
+    # before_action :authenticate, except: [:new]
     def new
         @user = User.new(user_params)
         return response_bad_request(@user.errors.full_messages.first) unless @user.valid?
