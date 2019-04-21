@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
         user.token = Base64.encode64(user_params[:user_id] + ':' + user_params[:password])
         @user.save ? response_success("Account successfully created", {"user_id": @user.user_id, "nickname": @user.user_id}) : response_internal_server_error
     end
-
+# 
     def show
         @user = User.find_by(user_id: params[:user_id])
         return response_not_found() if @user.nil?
