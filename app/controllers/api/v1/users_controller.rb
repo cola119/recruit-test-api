@@ -16,7 +16,8 @@ class Api::V1::UsersController < ApplicationController
     def update
         @user = User.find_by(user_id: params[:user_id])
         return response_not_found() if @user.nil?
-        @comp.update(user_params) ?( render status: 200, json: { message: "User successfully updated", recipe: User.find_by(user_id: params[:user_id]) } ): response_internal_server_error
+        recipe = {nickname: params[:nickname], comment: params[:comment]}
+        @comp.update(user_params) ?( render status: 200, json: { message: "User successfully updated", recipe: recipe } ): response_internal_server_error
     end
 
     def destroy
